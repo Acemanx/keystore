@@ -1,0 +1,22 @@
+Creación del Java KeyStore:
+
+keytool -genkey -alias cgc.saceved.bancolombia.com -keystore cgc_saceved_keystore.jks -keyalg RSA -sigalg SHA256withRSA -keysize 2048 -validity 365
+
+Verificar expiración certificado:
+
+keytool -list -v -keystore cgc_saceved_keystore.jks
+
+Importar llave pública y cadena de confianza:
+
+keytool -import -trustcacerts -alias ISSUINGBANCOLOMBIACA2 -file ISSUINGBANCOLOMBIACA2.cer -keystore cgc_saceved_keystore.jks
+
+keytool -import -trustcacerts -alias ISSUINGBANCOLOMBIACA -file ISSUINGBANCOLOMBIACA.cer -keystore cgc_saceved_keystore.jks
+
+keytool -import -trustcacerts -alias ROOTBANCOLOMBIACA -file ROOTBANCOLOMBIACA.cer -keystore cgc_saceved_keystore.jks
+
+keytool -import -trustcacerts -alias CAWSQMGRCGC01 -file CAWSQMGRCGC01.apps.ambientesbc.lab.cer -keystore cgc_saceved_keystore.jks
+
+
+Exportar certificado
+
+keytool -v -export -file SACEVED.cer -keystore cgc_saceved_keystore.jks -alias SACEVED
